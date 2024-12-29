@@ -1,0 +1,66 @@
+<%- include('../partials/header') %>
+
+<div class="admin-dashboard">
+    <div class="dashboard-header">
+        <h1>Admin Dashboard</h1>
+        <a href="/admin/create" class="btn btn-primary">Create New Post</a>
+    </div>
+
+    <div class="dashboard-stats">
+        <div class="stat-card">   
+            <h3>Total Posts</h3>
+            <p class="stat-number"><%= posts.length %></p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Views</h3>
+            <p class="stat-number"><%= posts.reduce((sum, post) => sum + post.views, 0) %></p>
+        </div>
+        <div class="stat-card">
+            <h3>Total Comments</h3>
+            <p class="stat-number">
+                <%= posts.reduce((sum, post) => sum + (post.comments ? post.comments.length : 0), 0) %>
+            </p>
+        </div>
+    </div>
+
+    <div class="posts-management">
+        <h2>Manage Posts</h2>
+        <div class="table-responsive">
+            <table class="posts-table">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Views</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% posts.forEach(post => { %>
+                        <tr>
+                            <td>
+                                <a href="/post/<%= post.slug %>" target="_blank"><%= post.title %></a>
+                            </td>
+                            <td><%= new Date(post.createdAt).toLocaleDateString() %></td>
+                            <td><span class="status-badge <%= post.status %>"><%= post.status %></span></td>
+                            <td><%= post.views %></td>
+                            <td class="actions">
+                                <a href="/admin/posts/edit/<%= post._id %>" class="btn btn-sm btn-edit">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+                                <form action="/admin/posts/<%= post._id %>?_method=DELETE" method="POST" class="delete-form">
+                                    <button type="submit" class="btn btn-sm btn-delete" onclick="return confirm('Are you sure you want to delete this post?')">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<%- include('../partials/footer') %>

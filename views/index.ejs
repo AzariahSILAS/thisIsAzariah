@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+<div class="posts-container">
+    <h1>Blog Posts</h1>
+    
+    <div class="posts-grid">
+        <% if (posts && posts.length > 0) { %>
+            <% posts.forEach(post => { %>
+                <div class="post-card">
+                    <h2><%= post.title %></h2>
+                    <div class="post-meta">
+                        <span>By <%= post.author %></span>
+                        <% if (post.createdAt) { %>
+                            <span>• <%= new Date(post.createdAt).toLocaleDateString() %></span>
+                        <% } %>
+                    </div>
+                    <p><%= post.content ? post.content.substring(0, 150) + '...' : '' %></p>
+                    <a href="/post/<%= post.id %>" class="read-more">Read More</a>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No posts found.</p>
+        <% } %>
+    </div>
+</div>
+
+<%- include('partials/footer') %>

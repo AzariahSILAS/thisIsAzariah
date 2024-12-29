@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<main class="container">
+    <section class="posts-grid">
+        <% posts.forEach(post => { %>
+            <article class="post-card">
+                <% if (post.coverImage) { %>
+                    <img src="/uploads/<%= post.coverImage %>" alt="<%= post.title %>">
+                <% } %>
+                <div class="post-content">
+                    <h2><a href="/post/<%= post.slug %>"><%= post.title %></a></h2>
+                    <div class="post-meta">
+                        <span class="date"><%= new Date(post.createdAt).toLocaleDateString() %></span>
+                        <span class="author"><%= post.author %></span>
+                    </div>
+                    <p class="excerpt"><%= post.excerpt %></p>
+                </div>
+            </article>
+        <% }) %>
+    </section>
+</main>
+
+<%- include('partials/footer') %>
