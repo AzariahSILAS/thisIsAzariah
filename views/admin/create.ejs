@@ -3,25 +3,79 @@
 <div class="create-post">
     <h1>Create New Post</h1>
     
-    <form action="/admin/create" method="POST">
+    <form action="/admin/create" method="POST" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" id="title" name="title" required>
+            <input type="text" id="title" name="title" required class="form-control">
+        </div>
+
+        <div class="form-group">
+            <label for="headerImage">Header Image</label>
+            <input type="file" 
+                   id="headerImage" 
+                   name="headerImage" 
+                   accept="image/*"
+                   class="form-control"
+                   onchange="previewImage(this)">
+            <div id="imagePreview" class="mt-2" style="display: none;">
+                <img src="" alt="Preview" style="max-width: 100%; height: auto;" class="headerImage">
+            </div>
         </div>
 
         <div class="form-group">
             <label for="content">Content</label>
-            <textarea id="content" name="content" rows="10" required></textarea>
+            <textarea id="content" name="content" rows="10" required class="form-control"></textarea>
         </div>
 
         <div class="form-group">
             <label for="author">Author</label>
-            <input type="text" id="author" name="author" value="Admin">
+            <input type="text" id="author" name="author" value="Admin" class="form-control">
         </div>
 
         <button type="submit" class="btn btn-primary">Create Post</button>
         <a href="/admin/dashboard" class="btn btn-secondary">Cancel</a>
-    </div>
-</form>
+    </form>
+</div>
+
+<script>
+function previewImage(input) {
+    const preview = document.getElementById('imagePreview');
+    const previewImg = preview.querySelector('img');
+    
+    if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            preview.style.display = 'block';
+        }
+        
+        reader.readAsDataURL(input.files[0]);
+    } else {
+        preview.style.display = 'none';
+    }
+}
+</script>
+
+<style>
+.headerImage {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+</style>
 
 <%- include('../partials/footer') %> 

@@ -1,6 +1,12 @@
 <%- include('../partials/header') %>
 
 <div class="single-post">
+    <% if (post.headerImage) { %>
+        <div class="post-header-image">
+            <img src="<%= post.headerImage %>" alt="<%= post.title %>" class="headerImage">
+        </div>
+    <% } %>
+
     <h1><%= post.title %></h1>
     
     <div class="post-meta">
@@ -12,5 +18,34 @@
         <%= post.content %>
     </div>
 </div>
+
+<style>
+.post-header-image {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.headerImage {
+    width: 100%;
+    height: 400px; /* Adjust this value as needed */
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.single-post {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.post-meta {
+    margin: 1rem 0 2rem;
+    color: #666;
+}
+
+.post-content {
+    line-height: 1.6;
+}
+</style>
 
 <%- include('../partials/footer') %> 

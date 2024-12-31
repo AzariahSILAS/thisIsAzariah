@@ -11,15 +11,15 @@ router.get('/', async (req, res) => {
         const snapshot = await getDocs(postsCollection);
         
         const posts = snapshot.docs.map(doc => ({
-            id: doc.id,
+            id: doc.id, 
             ...doc.data()
         }));
 
         res.render('posts/index', { posts });
     } catch (error) {
         console.error('Error fetching posts:', error);
-        res.render('error', { error: 'Failed to load posts' });
-    }
+        res.render('error', { error: 'Failed to load posts' });  
+    } 
 });
 
 // Route to display a single post
@@ -32,9 +32,9 @@ router.get('/post/:id', async (req, res) => {
             return res.status(404).render('error', { error: 'Post not found' });
         }
 
-        const post = {
+        const post = { 
             id: snapshot.id,
-            ...snapshot.data()
+            ...snapshot.data() 
         };
 
         res.render('posts/show', { post });

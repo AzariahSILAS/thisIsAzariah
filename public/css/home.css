@@ -4,6 +4,22 @@
     padding: 2rem;
 }
 
+.headerImage{
+    width: 100%; 
+}
+.first-section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f8f8;
+}
+.first-section-text{
+    width: 50%;
+}
+.first-section-img{
+    width: 50%;
+}
 .posts-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -60,9 +76,15 @@
 .main-nav {
     background: white;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 0;
+    position: fixed;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
     z-index: 1000;
+    top: 0;
+}
+
+.main-nav.hidden {
+    transform: translateY(-100%) !important;
 }
 
 .nav-container {
@@ -117,4 +139,77 @@
     margin-top: 2rem;
     padding-top: 2rem;
     border-top: 1px solid #eee;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.nav-logo {
+    height: 60px; /* Adjust this value to match your needs */
+    width: auto;
+    margin-right: 1rem;
+}
+
+.recent-posts-flex {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2rem 0;
+}
+
+.recent-post-card {
+    flex: 0 1 300px; /* Adjust width as needed */
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+}
+
+.recent-post-card:hover {
+    transform: translateY(-5px);
+}
+
+.recent-post-img {
+    width: 100%;
+    height: 150px; /* Adjust height as needed */
+    overflow: hidden;
+}
+
+.recent-post-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.recent-post-content {
+    padding: 1rem;
+}
+
+.recent-post-content h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.2rem;
+}
+
+.recent-post-content p {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.view-more-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.view-more-btn:hover {
+    background: #0056b3;
 }

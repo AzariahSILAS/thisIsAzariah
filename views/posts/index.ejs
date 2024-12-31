@@ -1,5 +1,38 @@
 <%- include('../partials/header') %>
+<div class="headerImgDiv">
+    <img src="/images/home-Header.png" alt="headerImage" class="headerImage">
+</div>
+<div class="first-section">
+    <div class="first-section-text">
+        <h1>Why make this project?</h1>
+        <p>We live in a world full of consumption, there's of course a time for consumption but I think as humans our primary job is to create. Our brain seems to be better at creating ideas than storing them; that's the main issue with content consumption. Though it definitely has its place, I find myself in a space of filling my mind up with useless, unrelated short-form content. That makes me feel overwhelmed, and I find it hard to have the energy to now create ideas. What I'm doing here is using this as an avenue to strengthen that muscle, the creative muscle. The more I create and express, the better I should get at it.</p>
+    </div>
+    <first-section-img>
+        <img src="/images/firstSecImg.png" alt="first-section-img">
+    </first-section-img>
+</div>
 
+<div class="second-section">
+    <h2>Jump to the most recent.</h2>
+    <div class="recent-posts-flex">
+        <% if (posts && posts.length > 0) { %>
+            <% posts.slice(0, 3).forEach(post => { %>
+                <div class="recent-post-card">
+                    <div class="recent-post-img">
+                        <img src="<%= post.headerImage || '/images/default-header.png' %>" alt="Post header image">
+                    </div>
+                    <div class="recent-post-content">
+                        <h3><%= post.title %></h3>
+                        <p><%= post.content.split(' ').slice(0, 15).join(' ') %>...</p>
+                        <a href="/post/<%= post.id %>" class="view-more-btn">View More</a>
+                    </div>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p>No recent posts found.</p>
+        <% } %>
+    </div>
+</div>
 <div class="posts-container">
     <h1>Blog Posts</h1>
     

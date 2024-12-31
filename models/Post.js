@@ -15,7 +15,7 @@ class Post {
         this.comments = data.comments || [];
         this.createdAt = data.createdAt ? new Date(data.createdAt) : new Date();
         this.updatedAt = data.updatedAt ? new Date(data.updatedAt) : new Date();
-        this.views = data.views || 0;
+        this.views = data.views || 0;  
     }
 
     // Validate and prepare data before saving

@@ -5,8 +5,9 @@ import { dirname, join } from 'path';
 import { postRouter } from './routes/posts.js';
 import { adminRouter } from './routes/admin.js';
 import dotenv from 'dotenv';
+import methodOverride from 'method-override';
 
-dotenv.config();
+dotenv.config(); 
 
 const app = express();
 const __filename = fileURLToPath(import.meta.url);
@@ -16,8 +17,9 @@ const __dirname = dirname(__filename);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
+app.use(methodOverride('_method'));
 app.use(session({
-    secret: process.env.SESSION_SECRET || 'your-secret-key',
+    secret: process.env.SESSION_SECRET || 'your-secret-key', 
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false } // Set to true if using HTTPS
@@ -43,6 +45,8 @@ app.use((req, res) => {
     console.log('404 Error:', req.url);
     res.status(404).render('error', { error: 'Page not found' });
 });
+
+app.use('/uploads', express.static('public/uploads'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
